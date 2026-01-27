@@ -10,7 +10,7 @@
         <h1 style="
             display: inline-block;
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(to right, #00796b, #004d40);
+            background: linear-gradient(to right, #0c1829);
             color: #ffffff;
             padding: 15px 30px;
             border-radius: 12px;

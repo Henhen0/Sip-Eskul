@@ -30,7 +30,7 @@
 
     /* Background Pattern */
     .prestasi-hero {
-        background: linear-gradient(135deg, #ffffff 0%, #008cff 100%);
+        background: linear-gradient(135deg, #1e3039 0%, #55b0fc 100%);
         position: relative;
         overflow: hidden;
     }
@@ -493,8 +493,16 @@
         </div>
 
         <!-- Tengah -->
-        <div class="flex-item image fit round" style="display: flex; justify-content: center; align-items: center;">
-            <img src="{{ asset('user/images/nyes.png') }}" alt="Kepala Sekolah" style="width: 300px; height: 300px; object-fit: cover; border-radius: 50%; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+        <div style="display:flex; justify-content:center; align-items:center;">
+            <img 
+                src="{{ asset('user/images/salam.png') }}" 
+                alt="logo sekolah"
+                style="
+                    width:300px;
+                    height:auto;
+                    max-height:300px;
+                    object-fit:contain;
+                ">
         </div>
 
         <!-- Kanan -->
@@ -513,10 +521,9 @@
 
 <!-- Section Two -->
 <section id="two" class="wrapper style1 special" 
-    style="text-align: center; padding: 50px 0; background: linear-gradient(180deg,  #ffffff 0%, #6ebeff 50%);">
+    style="text-align: center; padding: 50px 0; background: linear-gradient(180deg, #0c1829 100% , #6ebeff 50%);">
     
     <header class="major">
-        <br>
         <h2>Pendaftaran Ekstrakurikuler SMK Assalaam Bandung</h2>
         <p>Pilih ekstrakurikuler yang sesuai dengan minat dan bakatmu!</p>
     </header>
@@ -531,7 +538,7 @@
     header.major p {
     font-family: 'Nunito', sans-serif;
     font-size: 1.1rem;
-    color : #ffffff;
+    color : #bdbdbd;
     }
     </style>
 
@@ -555,7 +562,7 @@
 
 <!-- Section Three -->
 <section id="eskul" class="wrapper">
-    <div class="inner" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+    <div class="inner" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
         @foreach ($eskul as $data)
             <div class="box" style="display: flex; flex-direction: column; background: #f9f9f9; padding: 15px; border-radius: 8px;">
                 

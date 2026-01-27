@@ -20,7 +20,7 @@ class LoginController extends Controller
         ]);
 
         // ⛔ Batasi hanya email admin tertentu
-        if ($request->email !== 'admin@example.com') {
+        if ($request->email !== 'assalaam@cyberx.com') {
             return back()->with('error', 'Hanya akun admin yang bisa login di sini.');
         }
 
