@@ -30,7 +30,7 @@
 
     /* Background Pattern */
     .prestasi-hero {
-        background: linear-gradient(135deg, #0f1419 0%, #008cff9e 100%);
+        background: linear-gradient(135deg, #ffffff 0%, #008cff 100%);
         position: relative;
         overflow: hidden;
     }
@@ -513,9 +513,10 @@
 
 <!-- Section Two -->
 <section id="two" class="wrapper style1 special" 
-    style="text-align: center; padding: 50px 0; background: linear-gradient(180deg, #0f1419 0%, #1a1f2e 50%, #0a0e17 100%);">
+    style="text-align: center; padding: 50px 0; background: linear-gradient(180deg,  #ffffff 0%, #6ebeff 50%);">
     
     <header class="major">
+        <br>
         <h2>Pendaftaran Ekstrakurikuler SMK Assalaam Bandung</h2>
         <p>Pilih ekstrakurikuler yang sesuai dengan minat dan bakatmu!</p>
     </header>
@@ -530,24 +531,25 @@
     header.major p {
     font-family: 'Nunito', sans-serif;
     font-size: 1.1rem;
-    opacity: 0.8;
+    color : #ffffff;
     }
     </style>
 
-    <div class="inner">
-        @guest
-            {{-- Tidak menampilkan tombol jika belum login --}}
-        @endguest
+<div class="inner">
+    @guest
+        {{-- Tidak menampilkan tombol jika belum login --}}
+    @endguest
 
-        @auth
-        <a href="{{ route('daftar-eskul') }}"
-            class="button"
-            style="background-color: #FF7559; color: white;">
-            Daftar Eskul Disini
-        </a>
+    @auth
+    <a href="{{ route('daftar-eskul') }}"
+        class="button"
+        style="background-color:#ff876f; color:white; box-shadow:none; border:none;">
+        <i class="fas fa-edit"></i>
+        Daftar Eskul Disini
+    </a>
+    @endauth
+</div>
 
-        @endauth
-    </div>
 </section>
 
 
