@@ -9,7 +9,8 @@
     <img src="{{ asset('user/images/es.png') }}" 
          width="100%" 
          height="700px" 
-         style="object-fit: cover; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.13); animation: zoomIn 1.2s ease-out;">
+         style="object-fit: cover; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.13); animation: zoomIn 1.2s ease-out;"
+         class="hero-banner">
 </div>
 
 <!-- Prestasi Card -->
@@ -227,6 +228,210 @@
 
     .icon-float {
         animation: float 2s ease-in-out infinite;
+    }
+
+    header.major h2 {
+        font-family: 'arsenal', sans-serif;
+        font-weight: 700;
+        font-size: 2.3rem;
+    }   
+
+    header.major p {
+        font-family: 'Nunito', sans-serif;
+        font-size: 1.1rem;
+        color: #bdbdbd;
+    }
+
+    /* ============================================ */
+    /* RESPONSIVE STYLES FOR MOBILE */
+    /* ============================================ */
+    
+    @media screen and (max-width: 768px) {
+        /* Banner Hero */
+        .hero-banner {
+            height: 300px !important;
+        }
+
+        /* Hero Section */
+        .prestasi-hero {
+            padding: 50px 20px !important;
+        }
+
+        .prestasi-hero h1 {
+            font-size: 2em !important;
+            margin-bottom: 15px !important;
+        }
+
+        .prestasi-hero p {
+            font-size: 1em !important;
+            padding: 0 10px;
+        }
+
+        .trophy-animate i {
+            font-size: 3em !important;
+        }
+
+        /* Stats Counter - Stack vertically */
+        .prestasi-hero .inner > div:last-of-type {
+            flex-direction: column !important;
+            gap: 30px !important;
+            margin-top: 30px !important;
+        }
+
+        .stat-number div:first-child {
+            font-size: 2em !important;
+        }
+
+        .stat-number div:last-child {
+            font-size: 0.9em !important;
+        }
+
+        /* Section One - Stack vertically */
+        #one .flex-3 {
+            flex-direction: column !important;
+            gap: 30px !important;
+        }
+
+        #one .flex-item h3 {
+            font-size: 1.3em !important;
+        }
+
+        #one .flex-item p {
+            font-size: 0.95em !important;
+        }
+
+        /* Logo tengah */
+        #one img {
+            width: 200px !important;
+            max-height: 200px !important;
+        }
+
+        /* Section Two - Header */
+        header.major h2 {
+            font-size: 1.5rem !important;
+            padding: 0 15px;
+        }
+
+        header.major p {
+            font-size: 0.95rem !important;
+            padding: 0 15px;
+        }
+
+        #two {
+            padding: 30px 15px !important;
+        }
+
+        /* Eskul Grid - 1 column on mobile */
+        #eskul .inner {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+            padding: 0 15px;
+        }
+
+        .box {
+            margin-bottom: 0 !important;
+        }
+
+        .box .image {
+            height: 250px !important;
+        }
+
+        .box h3 {
+            font-size: 1.2em !important;
+            min-height: auto !important;
+        }
+
+        .box p {
+            font-size: 0.9em !important;
+            min-height: auto !important;
+        }
+
+        /* Notifications */
+        .alert-diterima, 
+        .alert-ditolak,
+        div[style*="background-color: #e0f7fa"],
+        div[style*="background-color: #fff3e0"] {
+            margin: 20px 15px !important;
+            padding: 15px !important;
+            font-size: 0.9em !important;
+        }
+
+        .alert-diterima p,
+        .alert-ditolak p {
+            font-size: 0.85em !important;
+        }
+
+        /* Cetak Kartu Button */
+        a[href*="kartu.eskul"] {
+            width: 120px !important;
+            height: 40px !important;
+            font-size: 14px !important;
+        }
+
+        .btn-coba-lagi {
+            padding: 8px 16px !important;
+            font-size: 0.9em !important;
+        }
+
+        /* Disable hover animations on mobile */
+        .box:hover {
+            transform: none !important;
+        }
+
+        .flex-item.image img:hover {
+            transform: none !important;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        /* Extra small devices */
+        .hero-banner {
+            height: 250px !important;
+        }
+
+        .prestasi-hero {
+            padding: 40px 15px !important;
+        }
+
+        .prestasi-hero h1 {
+            font-size: 1.5em !important;
+        }
+
+        .prestasi-hero p {
+            font-size: 0.9em !important;
+        }
+
+        .trophy-animate i {
+            font-size: 2.5em !important;
+        }
+
+        .stat-number div:first-child {
+            font-size: 1.8em !important;
+        }
+
+        header.major h2 {
+            font-size: 1.3rem !important;
+        }
+
+        #one img {
+            width: 150px !important;
+            max-height: 150px !important;
+        }
+
+        .box .image {
+            height: 200px !important;
+        }
+    }
+
+    /* Tablet Portrait */
+    @media screen and (min-width: 769px) and (max-width: 1024px) {
+        #eskul .inner {
+            grid-template-columns: repeat(2, 1fr) !important;
+        }
+
+        .prestasi-hero h1 {
+            font-size: 2.5em !important;
+        }
     }
 </style>
 
@@ -527,20 +732,6 @@
         <h2>Pendaftaran Ekstrakurikuler SMK Assalaam Bandung</h2>
         <p>Pilih ekstrakurikuler yang sesuai dengan minat dan bakatmu!</p>
     </header>
-
-    <style>
-    header.major h2 {
-    font-family: 'arsenal', sans-serif;
-    font-weight: 700;
-    font-size: 2.3rem;
-    }   
-
-    header.major p {
-    font-family: 'Nunito', sans-serif;
-    font-size: 1.1rem;
-    color : #bdbdbd;
-    }
-    </style>
 
 <div class="inner">
     @guest

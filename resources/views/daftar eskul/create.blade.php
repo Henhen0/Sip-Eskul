@@ -17,16 +17,83 @@
                     style="color: black; background-color: #ffffffff;">
             </div>
 
+           <!-- Tingkat -->
             <div class="field">
-                <label for="kelas" style="color: white;">Kelas</label>
-                <input type="text" name="kelas" id="kelas" class="form-control" required
-                style="color: black; background-color: #ffffffff;">
+                <label style="color:white;">Tingkat</label>
+                <select id="tingkat" class="form-control"  required style="color:black; background-color: #ffffffff;">
+                    <option value="" disabled selected hidden>Pilih Tingkat</option>
+                    <option value="X">X</option>
+                    <option value="XI">XI</option>
+                    <option value="XII">XII</option>
+                </select>
             </div>
+
+            <!-- Jurusan -->
+            <div class="field">
+                <label style="color:white;">Jurusan</label>
+                <select id="jurusan" class="form-control" required disabled style="color:black; background-color: #ffffffff;">
+                    <option value="" disabled selected hidden>Pilih jurusan</option>
+                    <option value="RPL">RPL</option>
+                    <option value="TBSM">TBSM</option>
+                    <option value="TKRO">TKRO</option>
+                </select>
+            </div>
+
+            <!-- Kelas -->
+            <div class="field">
+                <label style="color:white;">Kelas</label>
+                <select name="kelas" id="kelas" class="form-control" required disabled style="color:black; background-color: #ffffffff;">
+                    <option value="" disabled selected hidden>Pilih kelas</option>
+                </select>
+            </div>
+
+            <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const tingkat = document.getElementById("tingkat");
+                const jurusan = document.getElementById("jurusan");
+                const kelas = document.getElementById("kelas");
+
+                // Step 1 → aktifkan jurusan
+                tingkat.addEventListener("change", function () {
+                    jurusan.disabled = false;
+                    jurusan.selectedIndex = 0;
+
+                    kelas.disabled = true;
+                    kelas.innerHTML = '<option value="" disabled selected hidden>Pilih kelas</option>';
+                });
+
+                // Step 2 → isi kelas
+                jurusan.addEventListener("change", function () {
+                    const t = tingkat.value;
+                    const j = jurusan.value;
+
+                    kelas.disabled = false;
+                    kelas.innerHTML = '<option value="" disabled selected hidden>Pilih kelas</option>';
+
+                    for (let i = 1; i <= 3; i++) {
+                        let option = document.createElement("option");
+                        option.value = `${t} ${j} ${i}`;
+                        option.textContent = `${t} ${j} ${i}`;
+                        kelas.appendChild(option);
+                    }
+                });
+            });
+            </script>
+
+            @php
+                $tahun = date('Y');
+            @endphp
 
             <div class="field">
                 <label for="tahun_ajaran" style="color: white;">Tahun Ajaran</label>
-                <input type="text" name="tahun_ajaran" id="tahun_ajaran" class="form-control" placeholder="contoh: 2025/2026" 
-                style="color: black; background-color: #ffffffff;" required>
+
+                <input type="text"
+                    name="tahun_ajaran"
+                    id="tahun_ajaran"
+                    value="{{ $tahun }}"
+                    readonly
+                    class="form-control"
+                    style="color:black; background:#ffff;">
             </div>
 
             <div class="field"> 
@@ -35,16 +102,36 @@
                 style="color: black; background-color: #ffffffff;" required>
             </div>
 
-            <div class="field">
-                <label for="eskul_id" style="color: white;">Pilih Ekstrakurikuler</label>
-                <select name="eskul_id" class="form-control" style="color: black; background-color: #ffffffff;" required >
-                    @foreach($eskul as $e)
-                        <option value="{{ $e->id }}" {{ (isset($eskulId) && $eskulId == $e->id) ? 'selected' : '' }}>
-                            {{ $e->nama_eskul }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
+        <div class="field">
+            <label for="eskul_id" style="color: white;">Pilih Ekstrakurikuler</label>
+            <select name="eskul_id"
+                class="form-control"
+                style="color:black; background-color: #ffffffff;"
+                {{ isset($eskulId) ? 'disabled' : '' }}
+                required>
+
+                @foreach($eskul as $e)
+                    <option value="{{ $e->id }}"
+                        {{ (isset($eskulId) && $eskulId == $e->id) ? 'selected' : '' }}>
+                        {{ $e->nama_eskul }}
+                    </option>
+                @endforeach
+            </select>
+
+            {{-- kirim value kalau disabled --}}
+            @if(isset($eskulId))
+                <input type="hidden" name="eskul_id" value="{{ $eskulId }}">
+            @endif
+
+            <style>
+                .form-control:disabled,
+                .form-control[disabled]{
+                    background-color: #ffffff !important;
+                    color: #000 !important;
+                    opacity: 1 !important;
+                }
+            </style>
+        </div>
 
             <div class="field">
                 <label for="alasan" style="color: white;">Alasan Bergabung</label>

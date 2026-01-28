@@ -11,7 +11,7 @@
         <div class="kartu">
             {{-- HEADER --}}
             <div class="header">
-                <img src="{{ asset('user/images/logo-custom.png') }}" class="logo-kiri">
+                <img src="{{ asset('user/images/salam.png') }}" class="logo-kiri">
 
                 <div class="judul">
                     <b>KARTU ANGGOTA ESKUL</b>
@@ -293,10 +293,6 @@
     transition: color 0.3s ease;
 }
 
-.kartu:hover .judul h4 {
-    color: #0056b3;
-}
-
 /* LINE */
 .line{
     border:0;
@@ -305,13 +301,14 @@
     transition: border-color 0.3s ease;
 }
 
-.kartu:hover .line {
-    border-top-color: rgba(0, 86, 179, 0.7);
-}
-
 @media print{
     .line{
         border-top:1px solid #000000 !important;
+    }
+
+    /* sembunyikan semua layout selain kartu */
+    header, nav, footer, .navbar, .sidebar {
+        display: none !important;
     }
 }
 
