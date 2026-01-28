@@ -374,6 +374,7 @@
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s ease;
+    word-break: break-word;
 }
 
 .contact-value:hover {
@@ -526,22 +527,35 @@
     50% { transform: scale(1.2); }
 }
 
-/* ========== RESPONSIVE ========== */
+/* ========================================
+   RESPONSIVE STYLES FOR MOBILE
+   ======================================== */
+
+/* Tablets and medium devices */
 @media (max-width: 1024px) {
     .footer-row {
         grid-template-columns: 1fr 1fr;
-        gap: 50px;
+        gap: 45px;
     }
     
     .footer-about {
         grid-column: 1 / -1;
     }
+
+    .container {
+        padding: 0 20px;
+    }
+
+    .footer-main {
+        padding: 60px 0 45px;
+    }
 }
 
+/* Tablets and smaller devices */
 @media (max-width: 768px) {
     .footer-row {
         grid-template-columns: 1fr;
-        gap: 45px;
+        gap: 40px;
     }
     
     .footer-about {
@@ -551,55 +565,358 @@
     .footer-main {
         padding: 50px 0 40px;
     }
-    
-    .bottom-wrapper {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .copyright {
-        text-align: center;
-    }
-    
-    .social-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
 
-@media (max-width: 480px) {
+    .container {
+        padding: 0 20px;
+    }
+
     .brand-text,
     .brand-highlight {
-        font-size: 30px;
+        font-size: 34px;
     }
-    
+
+    .brand-tagline {
+        font-size: 12px;
+        letter-spacing: 1.5px;
+    }
+
+    .about-text {
+        font-size: 14px;
+        line-height: 1.8;
+        margin-bottom: 25px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        justify-content: center;
+        padding: 13px 28px;
+        font-size: 15px;
+    }
+
     .footer-title span {
         font-size: 20px;
     }
-    
-    .btn-primary {
-        padding: 12px 24px;
+
+    .title-underline {
+        width: 45px;
+    }
+
+    .link-item {
+        font-size: 14px;
+        padding: 8px 0;
+    }
+
+    .contact-card {
+        padding: 16px;
+    }
+
+    .contact-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 19px;
+    }
+
+    .contact-label {
+        font-size: 11px;
+    }
+
+    .contact-value {
         font-size: 14px;
     }
-    
-    .contact-card {
-        padding: 15px;
+
+    .social-section {
+        margin-top: 30px;
     }
-    
-    .contact-icon {
-        width: 45px;
-        height: 45px;
-        font-size: 18px;
+
+    .social-title {
+        font-size: 15px;
+        margin-bottom: 15px;
     }
-    
+
     .social-grid {
         grid-template-columns: repeat(4, 1fr);
         gap: 10px;
     }
-    
+
     .social-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 19px;
+    }
+
+    .bottom-wrapper {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .copyright {
+        text-align: center;
+        font-size: 14px;
+        order: 2;
+    }
+
+    .developer {
+        font-size: 13px;
+        order: 3;
+    }
+
+    .back-to-top {
+        order: 1;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+    .footer-main {
+        padding: 40px 0 35px;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .footer-row {
+        gap: 35px;
+    }
+
+    .brand-text,
+    .brand-highlight {
+        font-size: 28px;
+    }
+
+    .brand-tagline {
+        font-size: 11px;
+        letter-spacing: 1px;
+    }
+
+    .brand-section {
+        margin-bottom: 20px;
+    }
+
+    .about-text {
+        font-size: 13px;
+        line-height: 1.7;
+        margin-bottom: 20px;
+    }
+
+    .btn-primary {
+        padding: 12px 24px;
+        font-size: 14px;
+        gap: 10px;
+    }
+
+    .btn-primary i {
+        font-size: 13px;
+    }
+
+    .footer-title {
+        margin-bottom: 25px;
+    }
+
+    .footer-title span {
+        font-size: 18px;
+    }
+
+    .title-underline {
+        width: 40px;
+        height: 2.5px;
+        margin-top: 8px;
+    }
+
+    .link-list {
+        gap: 8px;
+    }
+
+    .link-item {
+        font-size: 13px;
+        padding: 7px 0;
+        gap: 10px;
+    }
+
+    .link-item i {
+        font-size: 9px;
+    }
+
+    .contact-items {
+        gap: 15px;
+        margin-bottom: 28px;
+    }
+
+    .contact-card {
+        padding: 14px;
+        gap: 15px;
+        border-radius: 10px;
+    }
+
+    .contact-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 17px;
+        border-radius: 10px;
+    }
+
+    .contact-label {
+        font-size: 10px;
+    }
+
+    .contact-value {
+        font-size: 13px;
+    }
+
+    .social-section {
+        margin-top: 25px;
+    }
+
+    .social-title {
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+
+    .social-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+    }
+
+    .social-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 17px;
+        border-radius: 10px;
+    }
+
+    .footer-bottom {
+        padding: 25px 0;
+    }
+
+    .back-to-top {
         width: 45px;
         height: 45px;
-        font-size: 18px;
+        font-size: 16px;
+        border-radius: 10px;
+    }
+
+    .copyright {
+        font-size: 13px;
+    }
+
+    .developer {
+        font-size: 12px;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+    .container {
+        padding: 0 12px;
+    }
+
+    .brand-text,
+    .brand-highlight {
+        font-size: 26px;
+    }
+
+    .brand-tagline {
+        font-size: 10px;
+    }
+
+    .about-text {
+        font-size: 12px;
+    }
+
+    .btn-primary {
+        padding: 11px 20px;
+        font-size: 13px;
+    }
+
+    .footer-title span {
+        font-size: 17px;
+    }
+
+    .link-item {
+        font-size: 12px;
+    }
+
+    .contact-card {
+        padding: 12px;
+    }
+
+    .contact-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 16px;
+    }
+
+    .contact-value {
+        font-size: 12px;
+    }
+
+    .social-btn {
+        width: 42px;
+        height: 42px;
+        font-size: 16px;
+    }
+}
+
+/* Landscape orientation on mobile */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+    .footer-main {
+        padding: 40px 0 35px;
+    }
+
+    .footer-row {
+        gap: 30px;
+    }
+
+    .brand-section {
+        margin-bottom: 18px;
+    }
+
+    .about-text {
+        margin-bottom: 20px;
+    }
+
+    .footer-title {
+        margin-bottom: 20px;
+    }
+
+    .link-list {
+        gap: 6px;
+    }
+
+    .link-item {
+        padding: 6px 0;
+    }
+}
+
+/* Improve touch targets for mobile */
+@media (hover: none) and (pointer: coarse) {
+    .btn-primary,
+    .link-item,
+    .contact-card,
+    .social-btn {
+        min-height: 44px; /* Apple's recommended minimum touch target */
+    }
+
+    .link-item {
+        padding: 12px 0;
+    }
+
+    /* Disable hover effects on touch devices */
+    .footer-col:hover .title-underline {
+        width: 50px;
+    }
+
+    .link-item:hover {
+        padding-left: 0;
+    }
+
+    .contact-card:hover {
+        transform: none;
+    }
+
+    .social-btn:hover {
+        transform: none;
     }
 }
 </style>

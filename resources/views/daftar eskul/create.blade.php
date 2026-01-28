@@ -139,31 +139,36 @@
                 style="color: black; background-color: #ffffffff;" required></textarea>   
             </div>
 
-           <div class="row mt-4">
-            <div class="d-flex flex-column flex-md-row justify-content-center gap-3 mt-4">
+           <div class="button-container mt-4">
                 <button type="submit" class="btn btn-success px-4 py-3 fw-bold shadow-sm w-100" style="border-radius: 8px;">
                     <i class="fa fa-paper-plane me-1"></i> Kirim Pendaftaran
                 </button>
-            </div>
-
-            <div>
+                
                 <button type="button" onclick="resetForm()" class="btn btn-warning px-4 py-3 fw-bold shadow-sm w-100" style="border-radius: 8px;">
                     <i class="fa fa-eraser me-1"></i> Kosongkan Formulir
                 </button>
-            </div>
            </div>
+        </form>
+    </div>
 </section>
 
 <style>
-
     body,
-        input.form-control,
-        select.form-control,
-        textarea.form-control,
-        label,
-        button {
-            font-family: 'Nunito', sans-serif;
-        }
+    input.form-control,
+    select.form-control,
+    textarea.form-control,
+    label,
+    button {
+        font-family: 'Nunito', sans-serif;
+    }
+
+    /* Button Container Styling */
+    .button-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 25px;
+    }
 
     button.btn-success {
         background-color: #28a745;
@@ -187,6 +192,165 @@
 
     button.btn-warning:hover {
         background-color: #e0a800;
+    }
+
+    /* ========================================
+       RESPONSIVE STYLES FOR MOBILE
+       ======================================== */
+    
+    /* Tablets and smaller devices */
+    @media screen and (max-width: 768px) {
+        .wrapper.style1 .inner {
+            padding: 20px 15px !important;
+        }
+
+        h2 {
+            font-size: 1.5rem !important;
+            margin-bottom: 20px !important;
+        }
+
+        .field {
+            margin-bottom: 15px;
+        }
+
+        .field label {
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .form-control {
+            font-size: 16px !important; /* Prevents zoom on iOS */
+            padding: 12px !important;
+            width: 100% !important;
+        }
+
+        select.form-control {
+            height: auto !important;
+            min-height: 45px;
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+        }
+
+        .button-container {
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            font-size: 0.95rem !important;
+            padding: 12px 20px !important;
+            width: 100% !important;
+        }
+    }
+
+    /* Mobile phones */
+    @media screen and (max-width: 480px) {
+        .wrapper.style1 .inner {
+            padding: 15px 10px !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+        }
+
+        section.wrapper.style1 {
+            padding: 15px 10px !important;
+        }
+
+        h2 {
+            font-size: 1.3rem !important;
+            margin-bottom: 15px !important;
+            padding: 0 10px;
+        }
+
+        form {
+            gap: 15px !important;
+        }
+
+        .field {
+            margin-bottom: 12px;
+        }
+
+        .field label {
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+
+        .form-control {
+            font-size: 16px !important; /* Prevents auto-zoom on focus */
+            padding: 10px !important;
+        }
+
+        select.form-control {
+            min-height: 42px;
+            background-position: right 10px center;
+            background-size: 12px;
+        }
+
+        textarea.form-control {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        .button-container {
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn {
+            font-size: 0.9rem !important;
+            padding: 10px 15px !important;
+        }
+
+        .btn i {
+            font-size: 0.85rem;
+        }
+    }
+
+    /* Extra small devices */
+    @media screen and (max-width: 360px) {
+        h2 {
+            font-size: 1.1rem !important;
+        }
+
+        .field label {
+            font-size: 0.85rem;
+        }
+
+        .form-control {
+            font-size: 14px !important;
+            padding: 8px !important;
+        }
+
+        .btn {
+            font-size: 0.85rem !important;
+            padding: 10px !important;
+        }
+    }
+
+    /* Improve touch targets for mobile */
+    @media (hover: none) and (pointer: coarse) {
+        .form-control,
+        .btn {
+            min-height: 44px; /* Apple's recommended minimum touch target */
+        }
+    }
+
+    /* Landscape orientation on mobile */
+    @media screen and (max-width: 768px) and (orientation: landscape) {
+        h2 {
+            font-size: 1.2rem !important;
+            margin-bottom: 15px !important;
+        }
+
+        .field {
+            margin-bottom: 10px;
+        }
+
+        form {
+            gap: 12px !important;
+        }
     }
 </style>
 
