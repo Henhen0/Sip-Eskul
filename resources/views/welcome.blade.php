@@ -1,22 +1,56 @@
 @extends('layouts.user')
 @section('content')
 
-<!-- Font Awesome (harus dalam <head>, tapi aman juga taruh di sini kalau belum ada) -->
+<!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <!-- Banner dengan animasi zoom in -->
-<div style="overflow: hidden;">
-    <img src="{{ asset('user/images/es.png') }}" 
-         width="100%" 
-         height="700px" 
-         style="object-fit: cover; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.13); animation: zoomIn 1.2s ease-out;"
-         class="hero-banner">
+<div class="hero-slider">
+    <div class="slides">
+        <img src="{{ asset('user/images/es.png') }}" class="slide active">
+        <img src="{{ asset('user/images/esi.jpg') }}" class="slide">
+        <img src="{{ asset('user/images/esuy.jpeg') }}" class="slide">
+    </div>
 </div>
 
-<!-- Prestasi Card -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 <style>
+    /* ============================================ */
+    /* HERO SLIDER STYLES */
+    /* ============================================ */
+    .hero-slider {
+        width: 100%;
+        height: 700px;
+        position: relative;
+        overflow: hidden;
+        background-color: #000;
+    }
+
+    .hero-slider .slides {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    .hero-slider .slide {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+
+    .hero-slider .slide.active {
+        opacity: 1;
+        animation: zoomIn 1.5s ease-out;
+    }
+
+    /* ============================================ */
+    /* ANIMATIONS */
+    /* ============================================ */
+    
     /* Animasi Banner */
     @keyframes zoomIn {
         from {
@@ -27,13 +61,6 @@
             transform: scale(1);
             opacity: 1;
         }
-    }
-
-    /* Background Pattern */
-    .prestasi-hero {
-        background: linear-gradient(135deg, #1e3039 0%, #55b0fc 100%);
-        position: relative;
-        overflow: hidden;
     }
 
     /* Trophy Animation */
@@ -59,11 +86,6 @@
             transform: translateY(0);
         }
     }
-
-    /* Medal Colors */
-    .medal-gold { color: #FFD700; }
-    .medal-silver { color: #C0C0C0; }
-    .medal-bronze { color: #CD7F32; }
 
     /* Stats Counter */
     @keyframes countUp {
@@ -186,12 +208,6 @@
         animation: fadeInDown 0.8s ease-out;
     }
 
-    /* Animasi untuk wave divider */
-    @keyframes wave {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
-    }
-
     /* Animasi pulse untuk notifikasi */
     @keyframes pulse {
         0%, 100% {
@@ -204,6 +220,13 @@
 
     .alert-diterima, .alert-ditolak {
         animation: fadeSlideIn 0.8s ease-out forwards, pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes fadeSlideIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     /* Animasi untuk tombol */
@@ -230,6 +253,22 @@
         animation: float 2s ease-in-out infinite;
     }
 
+    /* ============================================ */
+    /* GENERAL STYLES */
+    /* ============================================ */
+    
+    /* Background Pattern */
+    .prestasi-hero {
+        background: linear-gradient(135deg, #1e3039 0%, #55b0fc 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Medal Colors */
+    .medal-gold { color: #FFD700; }
+    .medal-silver { color: #C0C0C0; }
+    .medal-bronze { color: #CD7F32; }
+
     header.major h2 {
         font-family: 'arsenal', sans-serif;
         font-weight: 700;
@@ -243,12 +282,91 @@
     }
 
     /* ============================================ */
+    /* NOTIFICATION STYLES */
+    /* ============================================ */
+    
+    .alert-diterima {
+        background-color: #e8f5e9;
+        border-left: 5px solid #2e7d32;
+        padding: 20px;
+        border-radius: 8px;
+        color: #1b5e20;
+        font-family: 'Nunito', sans-serif;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    .icon-pulse {
+        display: inline-block;
+        animation: pulseIcon 1.2s ease-in-out infinite;
+        color: #43a047;
+        margin-top: 5px;
+    }
+
+    @keyframes pulseIcon {
+        0%, 100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        50% {
+            transform: scale(1.2);
+            opacity: 0.7;
+        }
+    }
+
+    .alert-ditolak {
+        background-color: #fff8e1;
+        border-left: 5px solid #f9a825;
+        padding: 20px;
+        border-radius: 8px;
+        color: #795548;
+        font-family: 'Nunito', sans-serif;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    .icon-shake {
+        display: inline-block;
+        animation: shakeIcon 1s infinite;
+        color: #e74c3c;
+        margin-top: 5px;
+    }
+
+    @keyframes shakeIcon {
+        0% { transform: rotate(0deg); }
+        25% { transform: rotate(10deg); }
+        50% { transform: rotate(-10deg); }
+        75% { transform: rotate(10deg); }
+        100% { transform: rotate(0deg); }
+    }
+
+    .btn-coba-lagi {
+        margin-top: 15px;
+        display: inline-block;
+        background-color: #002147;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-coba-lagi:hover {
+        background-color: #00472cff;
+    }
+
+    /* ============================================ */
     /* RESPONSIVE STYLES FOR MOBILE */
     /* ============================================ */
     
     @media screen and (max-width: 768px) {
-        /* Banner Hero */
-        .hero-banner {
+        /* Hero Slider */
+        .hero-slider {
             height: 300px !important;
         }
 
@@ -385,7 +503,7 @@
 
     @media screen and (max-width: 480px) {
         /* Extra small devices */
-        .hero-banner {
+        .hero-slider {
             height: 250px !important;
         }
 
@@ -435,6 +553,35 @@
     }
 </style>
 
+<!-- JavaScript untuk Hero Slider -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const slides = document.querySelectorAll('.hero-slider .slide');
+        let currentSlide = 0;
+        const slideInterval = 4000; // 4 detik
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        // Auto slide
+        setInterval(nextSlide, slideInterval);
+
+        // Inisialisasi slide pertama
+        showSlide(0);
+    });
+</script>
+
 <!-- Hero Section -->
 <section class="prestasi-hero" style="padding: 100px 0; position: relative;">
     <div class="inner" style="text-align: center; color: white; position: relative; z-index: 1;">
@@ -467,220 +614,123 @@
     </div>
 
     <!-- Wave Divider -->
-    <div style="position: absolute; bottom: 0; left: 0; width: 100%;">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" style="display: block;">
+    <div style="position: absolute; bottom: -1px; left: 0; width: 100%; line-height: 0;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" preserveAspectRatio="none" style="display: block; width: 100%; height: 80px;">
             <path fill="#ffffff" d="M0,64L48,69.3C96,75,192,85,288,80C384,75,480,53,576,48C672,43,768,53,864,58.7C960,64,1056,64,1152,58.7C1248,53,1344,43,1392,37.3L1440,32L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"></path>
         </svg>
     </div>
 </section>
 
-
 <!-- Notifikasi -->
-    @php
-        $daftar = \App\Models\DaftarEskul::where('user_id', Auth::id())->latest()->first();
-    @endphp
+@php
+    $daftar = \App\Models\DaftarEskul::where('user_id', Auth::id())->latest()->first();
+@endphp
 
-    @if($daftar && $daftar->status == 'Diterima')
-        <style>
-            .alert-diterima {
-                background-color: #e8f5e9;
-                border-left: 5px solid #2e7d32;
-                padding: 20px;
-                border-radius: 8px;
-                color: #1b5e20;
-                font-family: 'Nunito', sans-serif;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-                text-align: center;
-                opacity: 0;
-                transform: translateY(30px);
-                animation: fadeSlideIn 0.8s ease-out forwards;
-            }
+@if($daftar && $daftar->status == 'Diterima')
+    <div style="margin: 30px auto; max-width: 800px;">
+        <div class="alert-diterima">
+            <strong>🎉 Selamat!</strong> {{ Auth::user()->name }}
+            <i class="fas fa-check-circle fa-lg mb-2 icon-pulse"></i><br>
 
-            @keyframes fadeSlideIn {
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
+            Kamu telah <strong>DITERIMA</strong> sebagai anggota
+            <strong>{{ $daftar->eskul->nama_eskul }}</strong>.
 
-            .icon-pulse {
-                display: inline-block;
-                animation: pulseIcon 1.2s ease-in-out infinite;
-                color: #43a047;
-                margin-top: 5px;
-            }
+            <hr style="margin:12px 0; opacity:.1">
 
-            @keyframes pulseIcon {
-                0%, 100% {
-                    transform: scale(1);
-                    opacity: 1;
-                }
-                50% {
-                    transform: scale(1.2);
-                    opacity: 0.7;
-                }
-            }
-        </style>
-
-        <div style="margin: 30px auto; max-width: 800px;">
-            <div class="alert-diterima">
-                <strong>🎉 Selamat!</strong> {{ Auth::user()->name }}
-                <i class="fas fa-check-circle fa-lg mb-2 icon-pulse"></i><br>
-
-                Kamu telah <strong>DITERIMA</strong> sebagai anggota
-                <strong>{{ $daftar->eskul->nama_eskul }}</strong>.
-
-                <hr style="margin:12px 0; opacity:.1">
-
-                <p style="font-size:14px; line-height:1.6;">
-                Status pendaftaranmu telah disetujui oleh pembina ekstrakurikuler.
-                Silakan mencetak kartu anggota sebagai bukti resmi keikutsertaan
-                dalam kegiatan ekstrakurikuler di sekolah.
-                </p>
-            </div>
-
-            <div style="margin-top:20px; text-align:center;">
-                <a href="{{ route('kartu.eskul', $daftar->id) }}"
-                title="Cetak Kartu Eskul"
-                style="
-                        display:inline-flex;
-                        align-items:center;
-                        justify-content:center;
-                        width:140px;
-                        height:45px;
-                        background: linear-gradient(180deg, #0f1419 0%, #1a1f2e 50%, #0a0e17 100%);
-                        color:white;
-                        border-radius:5%;
-                        text-decoration:none;
-                        font-size:18px;
-                        box-shadow:0 6px 10px rgba(0, 0, 0, 0.5);
-                        transition:.3s;
-                        animation: buttonGlow 2s ease-in-out infinite;
-                "
-                onmouseover="this.style.transform='scale(1.1)'"
-                onmouseout="this.style.transform='scale(1)'"
-                >
-                    <i class="fas fa-print icon-float"></i>
-                    &nbsp; Cetak Kartu
-                </a>
-            </div>
-
+            <p style="font-size:14px; line-height:1.6;">
+            Status pendaftaranmu telah disetujui oleh pembina ekstrakurikuler.
+            Silakan mencetak kartu anggota sebagai bukti resmi keikutsertaan
+            dalam kegiatan ekstrakurikuler di sekolah.
+            </p>
         </div>
 
-    @elseif($daftar && $daftar->status == 'Ditolak')
-        <style>
-            .alert-ditolak {
-                background-color: #fff8e1;
-                border-left: 5px solid #f9a825;
-                padding: 20px;
-                border-radius: 8px;
-                color: #795548;
-                font-family: 'Nunito', sans-serif;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-                text-align: center;
-                opacity: 0;
-                transform: translateY(30px);
-                animation: fadeSlideIn 0.8s ease-out forwards;
-            }
-
-            @keyframes fadeSlideIn {
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-
-            .icon-shake {
-                display: inline-block;
-                animation: shakeIcon 1s infinite;
-                color: #e74c3c;
-                margin-top: 5px;
-            }
-
-            @keyframes shakeIcon {
-                0% { transform: rotate(0deg); }
-                25% { transform: rotate(10deg); }
-                50% { transform: rotate(-10deg); }
-                75% { transform: rotate(10deg); }
-                100% { transform: rotate(0deg); }
-            }
-
-            .btn-coba-lagi {
-                margin-top: 15px;
-                display: inline-block;
-                background-color: #002147;
-                color: #fff;
-                padding: 10px 20px;
-                border-radius: 25px;
-                text-decoration: none;
-                font-weight: bold;
-                transition: background-color 0.3s ease;
-            }
-
-            .btn-coba-lagi:hover {
-                background-color: #00472cff;
-            }
-        </style>
-
-        <div style="margin: 30px auto; max-width: 800px;">
-            <div class="alert-ditolak">
-                <strong>⚠️ Pemberitahuan</strong> {{ Auth::user()->name }}
-                <i class="fas fa-times-circle fa-lg mb-2 icon-shake"></i><br>
-
-                Pendaftaran kamu pada
-                <strong>{{ $daftar->eskul->nama_eskul ?? '' }}</strong>
-                belum dapat diterima.
-
-                <hr style="margin:12px 0; opacity:.3;">
-
-                <p style="font-size:14px; line-height:1.6;">
-                Hal ini dapat disebabkan oleh keterbatasan kuota,
-                hasil seleksi, atau pertimbangan pembina.
-                Jangan berkecil hati dan tetap semangat berprestasi.
-                </p>
-
-                <p style="font-size:15px;">
-                Silakan mendaftar pada ekstrakurikuler lain
-                yang sesuai dengan minat dan bakat kamu.
-                </p>
-                <a href="{{ route('daftar-eskul') }}" class="btn-coba-lagi">
-                    <i class="fas fa-redo"></i> Coba Daftar Lagi
-                </a>
-            </div>
+        <div style="margin-top:20px; text-align:center;">
+            <a href="{{ route('kartu.eskul', $daftar->id) }}"
+            title="Cetak Kartu Eskul"
+            style="
+                    display:inline-flex;
+                    align-items:center;
+                    justify-content:center;
+                    width:140px;
+                    height:45px;
+                    background: linear-gradient(180deg, #0f1419 0%, #1a1f2e 50%, #0a0e17 100%);
+                    color:white;
+                    border-radius:5%;
+                    text-decoration:none;
+                    font-size:18px;
+                    box-shadow:0 6px 10px rgba(0, 0, 0, 0.5);
+                    transition:.3s;
+                    animation: buttonGlow 2s ease-in-out infinite;
+            "
+            onmouseover="this.style.transform='scale(1.1)'"
+            onmouseout="this.style.transform='scale(1)'"
+            >
+                <i class="fas fa-print icon-float"></i>
+                &nbsp; Cetak Kartu
+            </a>
         </div>
+    </div>
 
-    @elseif(session('status'))
-        <div style="margin: 30px auto; max-width: 800px;">
-            <div style="background-color: #e0f7fa; border-left: 5px solid #00acc1; padding: 20px; border-radius: 8px; color: #006064; font-family: 'Nunito', sans-serif; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; animation: fadeSlideIn 0.8s ease-out;">
-                <strong>✔ Pendaftaran Terkirim!</strong><br>
-                {!! session('status') !!}
-            </div>
+@elseif($daftar && $daftar->status == 'Ditolak')
+    <div style="margin: 30px auto; max-width: 800px;">
+        <div class="alert-ditolak">
+            <strong>⚠️ Pemberitahuan</strong> {{ Auth::user()->name }}
+            <i class="fas fa-times-circle fa-lg mb-2 icon-shake"></i><br>
+
+            Pendaftaran kamu pada
+            <strong>{{ $daftar->eskul->nama_eskul ?? '' }}</strong>
+            belum dapat diterima.
+
+            <hr style="margin:12px 0; opacity:.3;">
+
+            <p style="font-size:14px; line-height:1.6;">
+            Hal ini dapat disebabkan oleh keterbatasan kuota,
+            hasil seleksi, atau pertimbangan pembina.
+            Jangan berkecil hati dan tetap semangat berprestasi.
+            </p>
+
+            <p style="font-size:15px;">
+            Silakan mendaftar pada ekstrakurikuler lain
+            yang sesuai dengan minat dan bakat kamu.
+            </p>
+            <a href="{{ route('daftar-eskul') }}" class="btn-coba-lagi">
+                <i class="fas fa-redo"></i> Coba Daftar Lagi
+            </a>
         </div>
+    </div>
 
-    @elseif($daftar && $daftar->status == 'Menunggu')
-        <div style="margin: 30px auto; max-width: 800px;">
-            <div style="background-color: #fff3e0; border-left: 5px solid #ff9800; padding: 20px; border-radius: 8px; color: #f57c00; font-family: 'Nunito', sans-serif; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; animation: fadeSlideIn 0.8s ease-out;">
-                <strong>⏳ Pendaftaran Dalam Proses &nbsp;</strong>
-                <i class="fas fa-hourglass-half fa-pulse fa-lg mb-2"></i><br>
-
-                Pendaftaran kamu pada
-                <strong>{{ $daftar->eskul->nama_eskul }}</strong>
-                sedang dalam tahap <strong>verifikasi</strong>.
-
-                <hr style="margin:12px 0; opacity:.3;">
-
-                <p style="font-size:14px; line-height:1.6;">
-                Mohon bersabar menunggu hasil seleksi dari pihak pembina.
-                Informasi lanjutan akan ditampilkan pada halaman ini
-                setelah proses seleksi selesai.
-                </p>
-
-                <p style="font-size:15px;">
-                📌 Pastikan kamu rutin memeriksa status pendaftaran.
-                </p>
-            </div>
+@elseif(session('status'))
+    <div style="margin: 30px auto; max-width: 800px;">
+        <div style="background-color: #e0f7fa; border-left: 5px solid #00acc1; padding: 20px; border-radius: 8px; color: #006064; font-family: 'Nunito', sans-serif; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; animation: fadeSlideIn 0.8s ease-out;">
+            <strong>✔ Pendaftaran Terkirim!</strong><br>
+            {!! session('status') !!}
         </div>
-    @endif
+    </div>
+
+@elseif($daftar && $daftar->status == 'Menunggu')
+    <div style="margin: 30px auto; max-width: 800px;">
+        <div style="background-color: #fff3e0; border-left: 5px solid #ff9800; padding: 20px; border-radius: 8px; color: #f57c00; font-family: 'Nunito', sans-serif; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; animation: fadeSlideIn 0.8s ease-out;">
+            <strong>⏳ Pendaftaran Dalam Proses &nbsp;</strong>
+            <i class="fas fa-hourglass-half fa-pulse fa-lg mb-2"></i><br>
+
+            Pendaftaran kamu pada
+            <strong>{{ $daftar->eskul->nama_eskul }}</strong>
+            sedang dalam tahap <strong>verifikasi</strong>.
+
+            <hr style="margin:12px 0; opacity:.3;">
+
+            <p style="font-size:14px; line-height:1.6;">
+            Mohon bersabar menunggu hasil seleksi dari pihak pembina.
+            Informasi lanjutan akan ditampilkan pada halaman ini
+            setelah proses seleksi selesai.
+            </p>
+
+            <p style="font-size:15px;">
+            📌 Pastikan kamu rutin memeriksa status pendaftaran.
+            </p>
+        </div>
+    </div>
+@endif
 
 <!-- Section One -->
 <section id="one" class="wrapper">
@@ -733,23 +783,21 @@
         <p>Pilih ekstrakurikuler yang sesuai dengan minat dan bakatmu!</p>
     </header>
 
-<div class="inner">
-    @guest
-        {{-- Tidak menampilkan tombol jika belum login --}}
-    @endguest
+    <div class="inner">
+        @guest
+            {{-- Tidak menampilkan tombol jika belum login --}}
+        @endguest
 
-    @auth
-    <a href="{{ route('daftar-eskul') }}"
-        class="button"
-        style="background-color:#ff876f; color:white; box-shadow:none; border:none;">
-        <i class="fas fa-edit"></i>
-        Daftar Eskul Disini
-    </a>
-    @endauth
-</div>
-
+        @auth
+        <a href="{{ route('daftar-eskul') }}"
+            class="button"
+            style="background-color:#FF5733; color:white; box-shadow:none; border:none;">
+            <i class="fas fa-edit"></i>
+            Daftar Eskul Disini
+        </a>
+        @endauth
+    </div>
 </section>
-
 
 <!-- Section Three -->
 <section id="eskul" class="wrapper">
@@ -767,11 +815,11 @@
                 <!-- KONTEN -->
                 <div class="content" style="margin-top: 10px; display: flex; flex-direction: column; flex-grow: 1;">
 
-                <!-- JUDUL -->
-                <h3 style="min-height: 48px; margin-bottom: 8px;
-                    line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
-                    {{ $data->nama_eskul }}
-                </h3>
+                    <!-- JUDUL -->
+                    <h3 style="min-height: 48px; margin-bottom: 8px;
+                        line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                        {{ $data->nama_eskul }}
+                    </h3>
 
                     <!-- DESKRIPSI -->
                     <p style="

@@ -31,14 +31,14 @@
         <li><a href="{{ url('/') }}#eskul">Eskul</a></li>
         <li><a href="https://wa.me/6281234567890" target="_blank">Kontak</a></li>
 
-        @guest
-            <!-- Kalau belum login -->
+        @auth
             <li>
-                <a href="{{ route('login') }}">
-                    Masuk
+                <a href="{{ route('profile') }}">
+                    Profile
                 </a>
             </li>
-        @endguest
+        @endauth
+
     </ul>
     </nav>
 

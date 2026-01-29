@@ -11,20 +11,21 @@
             @csrf
 
             <div class="field">
-                <label for="nama" style="color: white;">Nama Kamu</label>
+                <label for="nama" style="color: white;">Nama Kamu <span style="color: red;">*</span></label>
                 <input type="text" name="nama" id="nama" class="form-control" 
                     value="{{ Auth::user()->name }}" readonly 
                     style="color: black; background-color: #ffffffff;">
             </div>
 
           <div class="field">
-            <label style="color:white;">Kelas</label>
+            <label style="color:white;">Kelas <span style="color: red;">*</span></label>
             <select id="kelas_select" class="form-control" required style="color: black; background-color: #ffffffff;">
-                <option disabled selected hidden>Pilih Tingkat</option>
+                <option disabled selected hidden>Pilih Jurusan</option>
             </select>
 
             <!-- INI YANG DIKIRIM KE DATABASE -->
-            <input type="hidden" name="kelas" id="kelas">
+            <input type="hidden" name="kelas" id="kelas" required>
+            <small class="error-message" id="error-kelas" style="color: #ff6b6b; display: none; margin-top: 5px;">Kelas wajib dipilih!</small>
         </div>
 
         <script>
@@ -32,8 +33,8 @@
             const select = document.getElementById("kelas_select");
             const input  = document.getElementById("kelas");
 
-            const tingkat = ["X", "XI", "XII"];
             const jurusan = ["RPL", "TBSM", "TKRO"];
+            const tingkat = ["X", "XI", "XII"];
             const nomor   = ["1", "2", "3"];
 
             let step = 1;
@@ -43,7 +44,7 @@
                 step = 1;
                 data = {};
                 input.value = "";
-                loadOptions("Pilih Tingkat", tingkat);
+                loadOptions("Pilih Jurusan", jurusan);
             };
 
             function loadOptions(placeholder, arr) {
@@ -61,12 +62,12 @@
 
             select.addEventListener("change", function () {
                 if (step === 1) {
-                    data.tingkat = this.value;
+                    data.jurusan = this.value;
                     step = 2;
-                    loadOptions("Pilih Jurusan", jurusan);
+                    loadOptions("Pilih Kelas", tingkat);
                 } 
                 else if (step === 2) {
-                    data.jurusan = this.value;
+                    data.tingkat = this.value;
                     step = 3;
                     loadOptions("Pilih Nomor Kelas", nomor);
                 } 
@@ -77,21 +78,20 @@
 
                     select.innerHTML = `<option selected>${hasil}</option>`;
                     input.value = hasil;
+                    
+                    // Hide error when filled
+                    document.getElementById('error-kelas').style.display = 'none';
                 }
             });
         });
         </script>
-
-
-
-
 
             @php
                 $tahun = date('Y');
             @endphp
 
             <div class="field">
-                <label for="tahun_ajaran" style="color: white;">Tahun Ajaran</label>
+                <label for="tahun_ajaran" style="color: white;">Tahun Ajaran <span style="color: red;">*</span></label>
 
                 <input type="text"
                     name="tahun_ajaran"
@@ -103,19 +103,23 @@
             </div>
 
             <div class="field"> 
-                <label for="no_telp" style="color: white;">Nomor Telepon</label>
+                <label for="no_telp" style="color: white;">Nomor Telepon <span style="color: red;">*</span></label>
                 <input type="text" name="no_telp" id="no_telp" class="form-control" 
-                style="color: black; background-color: #ffffffff;" required>
+                style="color: black; background-color: #ffffffff;" 
+                placeholder="Contoh: 081234567890"
+                required>
+                <small class="error-message" id="error-no_telp" style="color: #ff6b6b; display: none; margin-top: 5px;">Nomor telepon wajib diisi!</small>
             </div>
 
         <div class="field">
-            <label for="eskul_id" style="color: white;">Pilih Ekstrakurikuler</label>
+            <label for="eskul_id" style="color: white;">Pilih Ekstrakurikuler <span style="color: red;">*</span></label>
             <select name="eskul_id"
+                id="eskul_id"
                 class="form-control"
                 style="color:black; background-color: #ffffffff;"
                 {{ isset($eskulId) ? 'disabled' : '' }}
                 required>
-
+                <option value="" disabled selected hidden>Pilih Ekstrakurikuler</option>
                 @foreach($eskul as $e)
                     <option value="{{ $e->id }}"
                         {{ (isset($eskulId) && $eskulId == $e->id) ? 'selected' : '' }}>
@@ -129,6 +133,8 @@
                 <input type="hidden" name="eskul_id" value="{{ $eskulId }}">
             @endif
 
+            <small class="error-message" id="error-eskul_id" style="color: #ff6b6b; display: none; margin-top: 5px;">Ekstrakurikuler wajib dipilih!</small>
+
             <style>
                 .form-control:disabled,
                 .form-control[disabled]{
@@ -140,9 +146,12 @@
         </div>
 
             <div class="field">
-                <label for="alasan" style="color: white;">Alasan Bergabung</label>
+                <label for="alasan" style="color: white;">Alasan Bergabung <span style="color: red;">*</span></label>
                 <textarea name="alasan" id="alasan" rows="4" class="form-control"
-                style="color: black; background-color: #ffffffff;" required></textarea>   
+                style="color: black; background-color: #ffffffff;" 
+                placeholder="Tuliskan alasan kamu ingin bergabung..."
+                required></textarea>
+                <small class="error-message" id="error-alasan" style="color: #ff6b6b; display: none; margin-top: 5px;">Alasan bergabung wajib diisi!</small>   
             </div>
 
            <div class="button-container mt-4">
@@ -198,6 +207,23 @@
 
     button.btn-warning:hover {
         background-color: #e0a800;
+    }
+
+    /* Validation Styles */
+    .form-control.is-invalid {
+        border: 2px solid #ff6b6b !important;
+        background-color: #fff5f5 !important;
+    }
+
+    .form-control.is-valid {
+        border: 2px solid #51cf66 !important;
+    }
+
+    .error-message {
+        font-size: 0.875rem;
+        font-weight: 500;
+        display: block;
+        margin-top: 5px;
     }
 
     /* ========================================
@@ -366,18 +392,121 @@
 
 <script>
     function resetForm() {
-    document.getElementById('formDaftarEskul').reset();
+        document.getElementById('formDaftarEskul').reset();
 
-        // reset logic kelas
+        // Reset logic kelas
         if (typeof resetKelas === "function") {
             resetKelas();
         }
+
+        // Reset all validation states
+        document.querySelectorAll('.form-control').forEach(function(input) {
+            input.classList.remove('is-invalid', 'is-valid');
+        });
+
+        document.querySelectorAll('.error-message').forEach(function(error) {
+            error.style.display = 'none';
+        });
     }
 
+    // Real-time validation
     $(document).ready(function () {
+        // Validate on input/change
+        $('#no_telp').on('input', function() {
+            const val = $(this).val().trim();
+            if (val === '') {
+                $(this).addClass('is-invalid').removeClass('is-valid');
+                $('#error-no_telp').show();
+            } else {
+                $(this).addClass('is-valid').removeClass('is-invalid');
+                $('#error-no_telp').hide();
+            }
+        });
+
+        $('#eskul_id').on('change', function() {
+            const val = $(this).val();
+            if (!val || val === '') {
+                $(this).addClass('is-invalid').removeClass('is-valid');
+                $('#error-eskul_id').show();
+            } else {
+                $(this).addClass('is-valid').removeClass('is-invalid');
+                $('#error-eskul_id').hide();
+            }
+        });
+
+        $('#alasan').on('input', function() {
+            const val = $(this).val().trim();
+            if (val === '') {
+                $(this).addClass('is-invalid').removeClass('is-valid');
+                $('#error-alasan').show();
+            } else {
+                $(this).addClass('is-valid').removeClass('is-invalid');
+                $('#error-alasan').hide();
+            }
+        });
+
+        // Form submission validation
         $('#formDaftarEskul').on('submit', function (e) {
             e.preventDefault();
 
+            let isValid = true;
+
+            // Validate Kelas
+            const kelasVal = $('#kelas').val();
+            if (!kelasVal || kelasVal.trim() === '') {
+                $('#kelas_select').addClass('is-invalid').removeClass('is-valid');
+                $('#error-kelas').show();
+                isValid = false;
+            } else {
+                $('#kelas_select').addClass('is-valid').removeClass('is-invalid');
+                $('#error-kelas').hide();
+            }
+
+            // Validate No Telp
+            const noTelpVal = $('#no_telp').val().trim();
+            if (noTelpVal === '') {
+                $('#no_telp').addClass('is-invalid').removeClass('is-valid');
+                $('#error-no_telp').show();
+                isValid = false;
+            } else {
+                $('#no_telp').addClass('is-valid').removeClass('is-invalid');
+                $('#error-no_telp').hide();
+            }
+
+            // Validate Eskul
+            const eskulVal = $('#eskul_id').val();
+            if (!eskulVal || eskulVal === '') {
+                $('#eskul_id').addClass('is-invalid').removeClass('is-valid');
+                $('#error-eskul_id').show();
+                isValid = false;
+            } else {
+                $('#eskul_id').addClass('is-valid').removeClass('is-invalid');
+                $('#error-eskul_id').hide();
+            }
+
+            // Validate Alasan
+            const alasanVal = $('#alasan').val().trim();
+            if (alasanVal === '') {
+                $('#alasan').addClass('is-invalid').removeClass('is-valid');
+                $('#error-alasan').show();
+                isValid = false;
+            } else {
+                $('#alasan').addClass('is-valid').removeClass('is-invalid');
+                $('#error-alasan').hide();
+            }
+
+            // If validation fails, show error alert
+            if (!isValid) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'OHH NO!',
+                    text: 'Ada beberapa kesalahan dalam formulir Anda. Silakan periksa kembali.',
+                    confirmButtonColor: '#d33'
+                });
+                return false;
+            }
+
+            // If validation passes, show success message
             Swal.fire({
                 icon: 'success',
                 title: 'Berhasil!',
@@ -386,8 +515,9 @@
                 timer: 1500
             });
 
+            const form = this;
             setTimeout(() => {
-                this.submit(); // Kirim form setelah notifikasi
+                form.submit(); // Submit form after notification
             }, 1500);
         });
     });

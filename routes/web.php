@@ -65,3 +65,9 @@
     // Kartu Eskul
     Route::get('/kartu-eskul/{daftar}', [KartuEskulController::class, 'index'])
     ->name('kartu.eskul');
+
+    //profile
+    Route::get('/profile', function () {
+        return view('eskul.profile');
+    })->middleware('auth')->name('profile');
+
