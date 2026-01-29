@@ -22,8 +22,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('daftar/{id}/tolak', [DaftarEskulController::class, 'tolak']);
 });
 
-Route::apiResource('eskul', EskulController::class);
-
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('kartu/{id}', [KartuEskulController::class, 'show']);
 });

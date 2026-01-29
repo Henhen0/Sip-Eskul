@@ -75,24 +75,4 @@ class DaftarEskulController extends Controller
         ]);
     }
 
-    /**
-     * PUT /api/daftar/{id}
-     */
-    public function update(Request $request, $id)
-    {
-        $daftar = DaftarEskul::findOrFail($id);
-
-        $request->validate([
-            'kelas' => 'required',
-            'eskul_id' => 'required|exists:eskuls,id'
-        ]);
-
-        $daftar->update($request->all());
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Data berhasil diupdate',
-            'data' => $daftar
-        ]);
-    }
 }

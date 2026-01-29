@@ -17,68 +17,74 @@
                     style="color: black; background-color: #ffffffff;">
             </div>
 
-           <!-- Tingkat -->
-            <div class="field">
-                <label style="color:white;">Tingkat</label>
-                <select id="tingkat" class="form-control"  required style="color:black; background-color: #ffffffff;">
-                    <option value="" disabled selected hidden>Pilih Tingkat</option>
-                    <option value="X">X</option>
-                    <option value="XI">XI</option>
-                    <option value="XII">XII</option>
-                </select>
-            </div>
+          <div class="field">
+            <label style="color:white;">Kelas</label>
+            <select id="kelas_select" class="form-control" required style="color: black; background-color: #ffffffff;">
+                <option disabled selected hidden>Pilih Tingkat</option>
+            </select>
 
-            <!-- Jurusan -->
-            <div class="field">
-                <label style="color:white;">Jurusan</label>
-                <select id="jurusan" class="form-control" required disabled style="color:black; background-color: #ffffffff;">
-                    <option value="" disabled selected hidden>Pilih jurusan</option>
-                    <option value="RPL">RPL</option>
-                    <option value="TBSM">TBSM</option>
-                    <option value="TKRO">TKRO</option>
-                </select>
-            </div>
+            <!-- INI YANG DIKIRIM KE DATABASE -->
+            <input type="hidden" name="kelas" id="kelas">
+        </div>
 
-            <!-- Kelas -->
-            <div class="field">
-                <label style="color:white;">Kelas</label>
-                <select name="kelas" id="kelas" class="form-control" required disabled style="color:black; background-color: #ffffffff;">
-                    <option value="" disabled selected hidden>Pilih kelas</option>
-                </select>
-            </div>
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const select = document.getElementById("kelas_select");
+            const input  = document.getElementById("kelas");
 
-            <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const tingkat = document.getElementById("tingkat");
-                const jurusan = document.getElementById("jurusan");
-                const kelas = document.getElementById("kelas");
+            const tingkat = ["X", "XI", "XII"];
+            const jurusan = ["RPL", "TBSM", "TKRO"];
+            const nomor   = ["1", "2", "3"];
 
-                // Step 1 → aktifkan jurusan
-                tingkat.addEventListener("change", function () {
-                    jurusan.disabled = false;
-                    jurusan.selectedIndex = 0;
+            let step = 1;
+            let data = {};
 
-                    kelas.disabled = true;
-                    kelas.innerHTML = '<option value="" disabled selected hidden>Pilih kelas</option>';
+            window.resetKelas = function () {
+                step = 1;
+                data = {};
+                input.value = "";
+                loadOptions("Pilih Tingkat", tingkat);
+            };
+
+            function loadOptions(placeholder, arr) {
+                select.innerHTML = `<option disabled selected hidden>${placeholder}</option>`;
+                arr.forEach(v => {
+                    let o = document.createElement("option");
+                    o.value = v;
+                    o.textContent = v;
+                    select.appendChild(o);
                 });
+            }
 
-                // Step 2 → isi kelas
-                jurusan.addEventListener("change", function () {
-                    const t = tingkat.value;
-                    const j = jurusan.value;
+            // init awal
+            resetKelas();
 
-                    kelas.disabled = false;
-                    kelas.innerHTML = '<option value="" disabled selected hidden>Pilih kelas</option>';
+            select.addEventListener("change", function () {
+                if (step === 1) {
+                    data.tingkat = this.value;
+                    step = 2;
+                    loadOptions("Pilih Jurusan", jurusan);
+                } 
+                else if (step === 2) {
+                    data.jurusan = this.value;
+                    step = 3;
+                    loadOptions("Pilih Nomor Kelas", nomor);
+                } 
+                else if (step === 3) {
+                    data.nomor = this.value;
 
-                    for (let i = 1; i <= 3; i++) {
-                        let option = document.createElement("option");
-                        option.value = `${t} ${j} ${i}`;
-                        option.textContent = `${t} ${j} ${i}`;
-                        kelas.appendChild(option);
-                    }
-                });
+                    const hasil = `${data.tingkat} ${data.jurusan} ${data.nomor}`;
+
+                    select.innerHTML = `<option selected>${hasil}</option>`;
+                    input.value = hasil;
+                }
             });
-            </script>
+        });
+        </script>
+
+
+
+
 
             @php
                 $tahun = date('Y');
@@ -360,7 +366,12 @@
 
 <script>
     function resetForm() {
-        document.getElementById('formDaftarEskul').reset();
+    document.getElementById('formDaftarEskul').reset();
+
+        // reset logic kelas
+        if (typeof resetKelas === "function") {
+            resetKelas();
+        }
     }
 
     $(document).ready(function () {
