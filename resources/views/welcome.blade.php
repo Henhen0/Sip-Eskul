@@ -8,9 +8,9 @@
 <div class="hero-slider">
     <div class="slides">
         <img src="{{ asset('user/images/es.png') }}" class="slide active">
+        <img src="{{ asset('user/images/bes.png') }}" class="slide">
         <img src="{{ asset('user/images/esi.jpg') }}" class="slide">
-        <img src="{{ asset('user/images/esuy.jpeg') }}" class="slide">
-    </div>
+    </div>  
 </div>
 
 <style>
