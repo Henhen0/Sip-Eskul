@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\EskulController;
 use App\Http\Controllers\Api\KartuEskulController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\DashboardController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -20,8 +21,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::patch('daftar/{id}/setuju', [DaftarEskulController::class, 'setuju']);
     Route::patch('daftar/{id}/tolak', [DaftarEskulController::class, 'tolak']);
+
+    Route::get('kartu/{id}', [KartuEskulController::class, 'show']);
+
+    Route::get('/eskul', [EskulController::class, 'index']);   // GET /api/eskul
+    Route::get('/eskul/{id}', [EskulController::class, 'show']); // GET /api/eskul/{id}
+    
 });
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('kartu/{id}', [KartuEskulController::class, 'show']);
-});
+
