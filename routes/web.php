@@ -55,7 +55,7 @@ Route::post('/admin/daftar/{id}/tolak', [DaftarEskulController::class, 'tolak'])
 Route::get('/daftar-eskul', [DaftarEskulController::class, 'create'])->name('daftar-eskul');
 Route::get('/daftar-eskul/{id}/edit', [DaftarEskulController::class, 'edit'])->name('daftar-eskul.edit');
 Route::put('/daftar-eskul/{id}', [DaftarEskulController::class, 'update'])->name('daftar-eskul.update');
-Route::delete('/daftar-eskul/{id}', [DaftarEskulController::class, 'destroy'])->name('daftar-eskul.destroy');
+Route::resource('daftar', DaftarEskulController::class);
 
 // Penerimaan
 Route::resource('penerimaan', PenerimaanController::class)->except(['store']);

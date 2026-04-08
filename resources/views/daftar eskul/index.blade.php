@@ -51,9 +51,13 @@
                 <form method="POST" action="{{ route('daftar.destroy', $data->id) }}" style="display: inline-block;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-primary btn-sm mb-1">HAPUS</button>
+                    <button type="submit" 
+                        onclick="return confirm('Yakin mau hapus data ini?')"
+                        class="btn btn-danger btn-sm">
+                        HAPUS
+                    </button>
                 </form>
-
+            </td>   
                 <td>
                     <form action="{{ route('penerimaan.store') }}" method="POST" style="display:inline;">
                         @csrf
@@ -69,7 +73,6 @@
                         <button type="submit" class="btn btn-danger btn-sm">✖</button>
                     </form>
                 </td>
-            </td>
         </tr>
         @empty
         @endforelse
