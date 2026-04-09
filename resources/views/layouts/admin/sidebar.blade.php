@@ -19,13 +19,39 @@
                             <span>Akses Berhasil</span>
                         </div>
                     </div>
+
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="/home" class="nav-item nav-link {{ Route::is('home') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <a href="eskul" class="nav-item nav-link {{ Route::is('eskul.index') ? 'active' : '' }} {{ Route::is('eskul.edit') ? 'active' : '' }} {{ Route::is('eskul.create') ? 'active' : '' }}"><i class="fa fa-th me-2"></i>Eskul</a>
-                    <a href="jadwal" class="nav-item nav-link {{ Route::is('jadwal.index') ? 'active' : '' }} {{ Route::is('jadwal.edit') ? 'active' : '' }} {{ Route::is('jadwal.create') ? 'active' : '' }} "><i class="fa fa-clock me-2"></i>Jadwal</a>
-                    <a href="daftar" class="nav-item nav-link {{ Route::is('daftar.index') ? 'active' : '' }} {{ Route::is('daftar.edit') ? 'active' : '' }}  {{ Route::is('daftar.create') ? 'active' : '' }}"><i class="fa fa-table me-2"></i>Pendaftaran Eskul</a>
-                    <a href="penerimaan" class="nav-item nav-link {{ Route::is('penerimaan.index') ? 'active' : '' }} {{ Route::is('penerimaan.edit') ? 'active' : '' }} {{ Route::is('penerimaan.create') ? 'active' : '' }}"><i class="fa fa-laptop me-2"></i>Penerimaan</a>
+                <a href="{{ route('home') }}" 
+                class="nav-item nav-link {{ Route::is('home') ? 'active' : '' }}">
+                    <i class="fa fa-tachometer-alt me-2"></i>Dashboard
+                </a>
+
+                <a href="{{ route('eskul.index') }}" 
+                class="nav-item nav-link {{ Route::is('eskul.*') ? 'active' : '' }}">
+                    <i class="fa fa-th me-2"></i>Eskul
+                </a>
+
+                <a href="{{ route('jadwal.index') }}" 
+                class="nav-item nav-link {{ Route::is('jadwal.*') ? 'active' : '' }}">
+                    <i class="fa fa-clock me-2"></i>Jadwal
+                </a>
+
+                <a href="{{ route('daftar.index') }}" 
+                class="nav-item nav-link {{ Route::is('daftar.*') ? 'active' : '' }}">
+                    <i class="fa fa-table me-2"></i>Pendaftaran Eskul
+                </a>
+
+                <a href="{{ route('penerimaan.index') }}" 
+                class="nav-item nav-link {{ Route::is('penerimaan.*') ? 'active' : '' }}">
+                    <i class="fa fa-laptop me-2"></i>Penerimaan
+                </a>
+
+                <a href="{{ route('admin.users.index') }}" 
+                class="nav-item nav-link {{ Route::is('admin.users.*') ? 'active' : '' }}">
+                    <i class="fa fa-users me-2"></i>Manajemen User
+                </a>
                 </div>
+
             </nav>
         </div>

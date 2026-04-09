@@ -38,6 +38,7 @@ Route::group([
     'middleware' => ['auth', IsAdminMiddleware::class]
 ], function() {
     Route::get('/', [HomeController::class, 'index'])->name('admin.home');
+    Route::resource('users', \App\Http\Controllers\UserController::class);
 });
 
 // Eskul
